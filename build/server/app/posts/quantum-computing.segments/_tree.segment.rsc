@@ -1,0 +1,3 @@
+:HL["/_next/static/chunks/9660d9d43ce442e8.css","style"]
+:HL["/_next/static/chunks/02637cd650830766.css","style"]
+0:{"buildId":"rCPRVbHo-p9WnVf2y83L7","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"posts","paramType":null,"paramKey":"posts","hasRuntimePrefetch":false,"slots":{"children":{"name":"slug","paramType":"d","paramKey":"quantum-computing","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

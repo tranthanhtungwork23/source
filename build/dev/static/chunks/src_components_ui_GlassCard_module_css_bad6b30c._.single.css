@@ -1,0 +1,27 @@
+/* [project]/src/components/ui/GlassCard.module.css [app-client] (css) */
+.GlassCard-module__S0rxXG__card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform .3s, box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.GlassCard-module__S0rxXG__reflection {
+  pointer-events: none;
+  background: linear-gradient(90deg, #0000, #ffffff0d, #0000);
+  width: 100%;
+  height: 100%;
+  transition: left .5s;
+  position: absolute;
+  top: 0;
+  left: -50%;
+  transform: skewX(-25deg);
+}
+
+.GlassCard-module__S0rxXG__card:hover .GlassCard-module__S0rxXG__reflection {
+  transition: left .5s;
+  left: 100%;
+}
+
+/*# sourceMappingURL=src_components_ui_GlassCard_module_css_bad6b30c._.single.css.map*/

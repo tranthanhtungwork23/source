@@ -1,0 +1,29 @@
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.contentWrapper {
+    display: flex;
+    gap: 2rem;
+}
+
+.mainFeed {
+    flex: 3;
+}
+
+.sidebarWrapper {
+    flex: 1;
+    min-width: 300px;
+}
+
+@media (max-width: 1024px) {
+    .contentWrapper {
+        flex-direction: column;
+    }
+
+    .sidebarWrapper {
+        width: 100%;
+    }
+}

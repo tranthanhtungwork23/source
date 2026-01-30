@@ -1,0 +1,91 @@
+/* [project]/src/components/home/Sidebar.module.css [app-client] (css) */
+.Sidebar-module__tc9fjW__sidebar {
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  display: flex;
+}
+
+.Sidebar-module__tc9fjW__section {
+  padding: 1.5rem;
+}
+
+.Sidebar-module__tc9fjW__title {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  border-bottom: 1px solid #00f3ff33;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  font-size: 1.1rem;
+}
+
+.Sidebar-module__tc9fjW__topics {
+  flex-direction: column;
+  gap: .8rem;
+  display: flex;
+}
+
+.Sidebar-module__tc9fjW__topicItem {
+  cursor: pointer;
+  letter-spacing: .05em;
+  background: #ffffff08;
+  border: 1px solid #ffffff0d;
+  border-radius: 8px;
+  align-items: center;
+  gap: .8rem;
+  padding: .8rem;
+  font-size: .9rem;
+  font-weight: 500;
+  transition: all .3s;
+  display: flex;
+}
+
+.Sidebar-module__tc9fjW__topicItem:hover {
+  border-color: var(--color-primary);
+  background: #00f3ff1a;
+  box-shadow: 0 0 10px #00f3ff33;
+}
+
+.Sidebar-module__tc9fjW__topicIcon {
+  font-size: 1.2rem;
+}
+
+.Sidebar-module__tc9fjW__discussions {
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+}
+
+.Sidebar-module__tc9fjW__discussionItem {
+  border-bottom: 1px solid #ffffff0d;
+  gap: .8rem;
+  padding-bottom: 1rem;
+  display: flex;
+}
+
+.Sidebar-module__tc9fjW__discussionItem:last-child {
+  border-bottom: none;
+}
+
+.Sidebar-module__tc9fjW__avatar {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.Sidebar-module__tc9fjW__username {
+  color: #fff;
+  margin-bottom: .2rem;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.Sidebar-module__tc9fjW__comment {
+  color: var(--color-text-dim);
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+/*# sourceMappingURL=src_components_home_Sidebar_module_css_bad6b30c._.single.css.map*/

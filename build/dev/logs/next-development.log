@@ -1,0 +1,6 @@
+[00:00:02.024] Server  LOG     ✓ Ready in 1469ms
+[00:00:05.220] Server  WARN    WordPress API URL is not configured. Returning dummy data.
+[00:00:07.806] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:12.243] Server  WARN    WordPress API URL is not configured. Returning dummy data.
+[00:00:12.839] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:08.459] Server  LOG       Reload env: .env.local

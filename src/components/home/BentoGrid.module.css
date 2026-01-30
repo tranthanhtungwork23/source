@@ -1,0 +1,138 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #fff;
+    overflow: hidden;
+}
+
+.imageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 1;
+}
+
+.card:hover .imageOverlay {
+    transform: scale(1.05);
+    opacity: 0.4;
+}
+
+/* Gradient overlay for text readability */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(5, 10, 21, 0.9), transparent);
+    z-index: 2;
+}
+
+.content {
+    position: relative;
+    z-index: 3;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: rgba(0, 243, 255, 0.2);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.headline {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.subHeadline {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.excerpt {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.readMore,
+.readMoreSm {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.readMore:hover,
+.readMoreSm:hover {
+    background: var(--color-primary);
+    color: #000;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+/* Grid Areas */
+.hero {
+    grid-column: span 2;
+}
+
+.secondary1 {
+    grid-column: span 1;
+}
+
+.secondary2 {
+    grid-column: span 1;
+}
+
+.wide {
+    grid-column: span 2;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .hero,
+    .secondary1,
+    .secondary2,
+    .wide {
+        grid-column: span 1;
+        height: 300px;
+    }
+}

@@ -1,0 +1,71 @@
+/* [project]/src/components/layout/Header.module.css [app-client] (css) */
+.Header-module__lnUIdW__header {
+  z-index: 100;
+  border-bottom: 1px solid var(--glass-border);
+  align-items: center;
+  height: 80px;
+  margin-bottom: 2rem;
+  display: flex;
+  position: sticky;
+  top: 0;
+}
+
+.Header-module__lnUIdW__container {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+}
+
+.Header-module__lnUIdW__logo {
+  letter-spacing: .1em;
+  color: #fff;
+  align-items: center;
+  gap: .5rem;
+  font-family: Orbitron, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+}
+
+.Header-module__lnUIdW__nav {
+  gap: 2rem;
+  display: flex;
+}
+
+.Header-module__lnUIdW__link {
+  color: var(--color-text-dim);
+  letter-spacing: .05em;
+  font-size: .85rem;
+  font-weight: 500;
+  transition: color .3s, text-shadow .3s;
+  position: relative;
+}
+
+.Header-module__lnUIdW__link:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 8px #00f3ff80;
+}
+
+.Header-module__lnUIdW__actions {
+  gap: 1rem;
+  display: flex;
+}
+
+.Header-module__lnUIdW__iconBtn {
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: .5rem;
+  transition: color .3s;
+}
+
+.Header-module__lnUIdW__iconBtn:hover {
+  color: var(--color-primary);
+}
+
+/*# sourceMappingURL=src_components_layout_Header_module_css_bad6b30c._.single.css.map*/
