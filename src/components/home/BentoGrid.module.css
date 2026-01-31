@@ -1,7 +1,7 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 300px);
+    grid-auto-rows: 250px;
     gap: 1.5rem;
     width: 100%;
 }
@@ -13,7 +13,27 @@
     justify-content: flex-end;
     color: #fff;
     overflow: hidden;
+    border-radius: 12px;
+    padding: 1.5rem;
 }
+
+/* Specific glows for different cards as seen in image */
+.hero {
+    border: 1px solid rgba(188, 19, 254, 0.3);
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.1);
+}
+
+.tall {
+    border: 1px solid rgba(188, 19, 254, 0.4);
+    box-shadow: inset 0 0 20px rgba(188, 19, 254, 0.1);
+}
+
+.wide,
+.small1,
+.small2 {
+    border: 1px solid rgba(188, 19, 254, 0.3);
+}
+
 
 .imageOverlay {
     position: absolute;
@@ -23,14 +43,15 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: 0.6;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0.7;
+    /* Darker by default to pop content */
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
     z-index: 1;
 }
 
 .card:hover .imageOverlay {
     transform: scale(1.05);
-    opacity: 0.4;
+    opacity: 0.5;
 }
 
 /* Gradient overlay for text readability */
@@ -41,32 +62,44 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(5, 10, 21, 0.9), transparent);
+    background: linear-gradient(to top, rgba(2, 6, 13, 0.95), rgba(2, 6, 13, 0.5) 40%, transparent);
     z-index: 2;
+    pointer-events: none;
 }
 
 .content {
     position: relative;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .tag {
     display: inline-block;
-    padding: 0.25rem 0.5rem;
-    background: rgba(0, 243, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.6);
     border: 1px solid var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary);
     color: var(--color-primary);
     font-size: 0.7rem;
     font-weight: 700;
     border-radius: 4px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    backdrop-filter: blur(4px);
 }
 
 .headline {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
     line-height: 1.2;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #fff, #b4e0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .subHeadline {
@@ -74,52 +107,73 @@
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     line-height: 1.3;
+    text-transform: uppercase;
 }
 
 .excerpt {
-    font-size: 0.9rem;
-    color: #ccc;
-    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    margin-bottom: 1.2rem;
     line-height: 1.5;
+    max-width: 80%;
 }
 
 .readMore,
 .readMoreSm {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-secondary);
     color: #fff;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     border-radius: 4px;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 5px rgba(188, 19, 254, 0.2);
 }
 
 .readMore:hover,
 .readMoreSm:hover {
-    background: var(--color-primary);
-    color: #000;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    background: var(--color-secondary);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.6);
+    border-color: var(--color-secondary);
 }
 
 /* Grid Areas */
 .hero {
-    grid-column: span 2;
+    grid-column: 1 / -1;
+    /* Spans full width (3 cols) */
+    grid-row: span 2;
+    /* Height 500px */
 }
 
-.secondary1 {
-    grid-column: span 1;
+/* Left vertical card */
+.tall {
+    grid-column: 1 / 2;
+    grid-row: span 2;
+    /* Height 500px */
 }
 
-.secondary2 {
-    grid-column: span 1;
-}
-
+/* Top right wide card */
 .wide {
-    grid-column: span 2;
+    grid-column: 2 / 4;
+    grid-row: span 1;
+    /* Height 250px */
+}
+
+/* Bot middle card */
+.small1 {
+    grid-column: 2 / 3;
+    grid-row: span 1;
+}
+
+/* Bot right card */
+.small2 {
+    grid-column: 3 / 4;
+    grid-row: span 1;
 }
 
 @media (max-width: 1024px) {
@@ -129,10 +183,12 @@
     }
 
     .hero,
-    .secondary1,
-    .secondary2,
-    .wide {
+    .tall,
+    .wide,
+    .small1,
+    .small2 {
         grid-column: span 1;
-        height: 300px;
+        grid-row: auto;
+        min-height: 300px;
     }
 }

@@ -37,7 +37,10 @@ const Sidebar = () => {
                 <div className={styles.discussions}>
                     {discussions.map((d, idx) => (
                         <div key={idx} className={styles.discussionItem}>
-                            <div className={styles.avatar}></div>
+                            <div
+                                className={styles.avatar}
+                                style={{ backgroundImage: `url(https://i.pravatar.cc/150?u=${d.user})` }}
+                            ></div>
                             <div>
                                 <div className={styles.username}>{d.user}</div>
                                 <div className={styles.comment}>{d.text}</div>

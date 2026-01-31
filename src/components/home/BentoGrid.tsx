@@ -9,12 +9,12 @@ interface BentoGridProps {
 }
 
 const BentoGrid: React.FC<BentoGridProps> = ({ posts }) => {
-    // We map the first 4 posts to specific grid slots
-    const [hero, sec1, sec2, wide] = posts;
+    // We map the posts to specific grid slots
+    const [hero, tall, wide, small1, small2] = posts;
 
     return (
         <div className={styles.grid}>
-            {/* Featured Main Article - Large */}
+            {/* 1. Featured Main Article - Full Width */}
             {hero && (
                 <GlassCard className={`${styles.card} ${styles.hero}`} variant="glowing">
                     <div
@@ -34,53 +34,72 @@ const BentoGrid: React.FC<BentoGridProps> = ({ posts }) => {
                 </GlassCard>
             )}
 
-            {/* Secondary Articles */}
-            {sec1 && (
-                <GlassCard className={`${styles.card} ${styles.secondary1}`} variant="glowing">
+            {/* 2. Vertical/Tall Article (Left) */}
+            {tall && (
+                <GlassCard className={`${styles.card} ${styles.tall}`} variant="glowing">
                     <div
                         className={styles.imageOverlay}
-                        style={{ backgroundImage: `url(${sec1.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop'})` }}
+                        style={{ backgroundImage: `url(${tall.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop'})` }}
                     ></div>
                     <div className={styles.content}>
-                        <Link href={`/posts/${sec1.slug}`}>
-                            <h3 className={styles.subHeadline} dangerouslySetInnerHTML={{ __html: sec1.title }} />
+                        <Link href={`/posts/${tall.slug}`}>
+                            <h3 className={styles.subHeadline} dangerouslySetInnerHTML={{ __html: tall.title }} />
                         </Link>
-                        <Link href={`/posts/${sec1.slug}`} className={styles.readMoreSm}>
+                        <Link href={`/posts/${tall.slug}`} className={styles.readMoreSm}>
                             READ MORE
                         </Link>
                     </div>
                 </GlassCard>
             )}
 
-            {sec2 && (
-                <GlassCard className={`${styles.card} ${styles.secondary2}`} variant="glowing">
-                    <div
-                        className={styles.imageOverlay}
-                        style={{ backgroundImage: `url(${sec2.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'})` }}
-                    ></div>
-                    <div className={styles.content}>
-                        <Link href={`/posts/${sec2.slug}`}>
-                            <h3 className={styles.subHeadline} dangerouslySetInnerHTML={{ __html: sec2.title }} />
-                        </Link>
-                        <Link href={`/posts/${sec2.slug}`} className={styles.readMoreSm}>
-                            READ MORE
-                        </Link>
-                    </div>
-                </GlassCard>
-            )}
-
-            {/* Sustainable Tech - Wide */}
+            {/* 3. Wide Article (Top Right) */}
             {wide && (
                 <GlassCard className={`${styles.card} ${styles.wide}`} variant="glowing">
                     <div
                         className={styles.imageOverlay}
-                        style={{ backgroundImage: `url(${wide.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1974&auto=format&fit=crop'})` }}
+                        style={{ backgroundImage: `url(${wide.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'})` }}
                     ></div>
                     <div className={styles.content}>
                         <Link href={`/posts/${wide.slug}`}>
-                            <h3 className={styles.headline} dangerouslySetInnerHTML={{ __html: wide.title }} />
+                            <h3 className={styles.subHeadline} dangerouslySetInnerHTML={{ __html: wide.title }} />
                         </Link>
-                        <Link href={`/posts/${wide.slug}`} className={styles.readMore}>
+                        <Link href={`/posts/${wide.slug}`} className={styles.readMoreSm}>
+                            READ MORE
+                        </Link>
+                    </div>
+                </GlassCard>
+            )}
+
+            {/* 4. Small Article 1 (Bot Middle) */}
+            {small1 && (
+                <GlassCard className={`${styles.card} ${styles.small1}`} variant="glowing">
+                    <div
+                        className={styles.imageOverlay}
+                        style={{ backgroundImage: `url(${small1.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1974&auto=format&fit=crop'})` }}
+                    ></div>
+                    <div className={styles.content}>
+                        <Link href={`/posts/${small1.slug}`}>
+                            <h3 className={styles.subHeadline} dangerouslySetInnerHTML={{ __html: small1.title }} />
+                        </Link>
+                        <Link href={`/posts/${small1.slug}`} className={styles.readMoreSm}>
+                            READ MORE
+                        </Link>
+                    </div>
+                </GlassCard>
+            )}
+
+            {/* 5. Small Article 2 (Bot Right) */}
+            {small2 && (
+                <GlassCard className={`${styles.card} ${styles.small2}`} variant="glowing">
+                    <div
+                        className={styles.imageOverlay}
+                        style={{ backgroundImage: `url(${small2.featuredImage?.node.sourceUrl || 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1974&auto=format&fit=crop'})` }}
+                    ></div>
+                    <div className={styles.content}>
+                        <Link href={`/posts/${small2.slug}`}>
+                            <h3 className={styles.subHeadline} dangerouslySetInnerHTML={{ __html: small2.title }} />
+                        </Link>
+                        <Link href={`/posts/${small2.slug}`} className={styles.readMoreSm}>
                             READ MORE
                         </Link>
                     </div>
