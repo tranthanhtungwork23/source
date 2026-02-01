@@ -1,37 +1,37 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getPosts, getPostBySlug } from '@/lib/get-posts';
+import { getPages, getPageBySlug } from '@/lib/get-pages';
 import GlassCard from '@/components/ui/GlassCard';
 import styles from './page.module.css';
 
 // ISR: Revalidate every 60 seconds
 export const revalidate = 60;
 
-// SSG: Generate static params for all posts
+// SSG: Generate static params for all pages
 export async function generateStaticParams() {
-    const posts = await getPosts();
-    return posts.map((post) => ({
-        slug: post.slug,
+    const pages = await getPages();
+    return pages.map((page) => ({
+        slug: page.slug,
     }));
 }
 
 // SEO: Generate metadata
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const post = await getPostBySlug(slug);
-    if (!post) return {};
+    const page = await getPageBySlug(slug);
+    if (!page) return {};
 
     return {
-        title: `${post.title} | TechnoVerse`,
-        description: post.excerpt.replace(/<[^>]*>/g, '').slice(0, 160), // Strip HTML tags
+        title: `${page.title} | TechnoVerse`,
+        description: page.content.replace(/<[^>]*>/g, '').slice(0, 160), // Strip HTML tags
     };
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const post = await getPostBySlug(slug);
+    const page = await getPageBySlug(slug);
 
-    if (!post) {
+    if (!page) {
         notFound();
     }
 
@@ -44,15 +44,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <GlassCard className={styles.articleCard} variant="default">
                 <header className={styles.header}>
                     <div className={styles.meta}>
-                        <span className={styles.date}>{post.date ? new Date(post.date).toLocaleDateString() : 'Futuristic Era'}</span>
-                        <span className={styles.tag}>Technology</span>
+                        <span className={styles.date}>{page.date ? new Date(page.date).toLocaleDateString() : ''}</span>
+                        {/* Pages might not have categories like Posts, so we can omit or check if "Page" makes sense */}
+                        {/* <span className={styles.tag}>Page</span> */}
                     </div>
-                    <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: post.title }} />
+                    <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: page.title }} />
 
-                    {post.featuredImage && (
+                    {page.featuredImage && (
                         <img
-                            src={post.featuredImage.node.sourceUrl}
-                            alt={post.title}
+                            src={page.featuredImage.node.sourceUrl}
+                            alt={page.title}
                             className={styles.featuredImage}
                         />
                     )}
@@ -60,7 +61,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
                 <div
                     className={styles.content}
-                    dangerouslySetInnerHTML={{ __html: post.content }}
+                    dangerouslySetInnerHTML={{ __html: page.content }}
                 />
             </GlassCard>
         </div>

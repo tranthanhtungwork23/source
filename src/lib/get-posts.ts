@@ -16,6 +16,18 @@ export interface Post {
   };
 }
 
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  count: number;
+}
+
+export interface SiteSettings {
+  title: string;
+  description: string;
+}
+
 // Fallback data for development if API is not configured
 const DUMMY_POSTS: Post[] = [
   {
@@ -63,6 +75,17 @@ const DUMMY_POSTS: Post[] = [
     date: '2024-05-10',
     featuredImage: { node: { sourceUrl: 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1974&auto=format&fit=crop' } }
   }
+];
+
+const DUMMY_CATEGORIES: Category[] = [
+  { id: '1', name: 'News', slug: 'news', count: 5 },
+  { id: '2', name: 'Blockchain & Web3', slug: 'blockchain-web3', count: 3 },
+  { id: '3', name: 'Cybersecurity', slug: 'cybersecurity', count: 2 },
+  { id: '4', name: 'Ed Tech', slug: 'educational-technology', count: 1 },
+  { id: '5', name: 'Metaverse', slug: 'metaverse', count: 4 },
+  { id: '6', name: 'Nanotech', slug: 'nanotech', count: 2 },
+  { id: '7', name: 'Robotics', slug: 'robotics', count: 3 },
+  { id: '8', name: 'Space', slug: 'space-exploration', count: 5 },
 ];
 
 export async function getPosts(): Promise<Post[]> {
@@ -133,5 +156,103 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } catch (error) {
     console.error(`Error fetching post with slug ${slug}:`, error);
     return null;
+  }
+}
+
+export async function getCategoryBySlug(slug: string): Promise<{ name: string; posts: Post[] } | null> {
+  if (!API_URL || API_URL.includes('your-wordpress-site.com')) {
+    const category = DUMMY_CATEGORIES.find(c => c.slug === slug);
+    return { name: category ? category.name : slug.toUpperCase(), posts: DUMMY_POSTS };
+  }
+
+  const client = new GraphQLClient(API_URL);
+
+  const query = gql`
+    query GetCategoryBySlug($slug: ID!) {
+      category(id: $slug, idType: SLUG) {
+        name
+        posts(first: 20) {
+          nodes {
+            id
+            title
+            slug
+            excerpt
+            content
+            date
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data: any = await client.request(query, { slug });
+    if (!data.category) return null;
+    return {
+      name: data.category.name,
+      posts: data.category.posts.nodes
+    };
+  } catch (error) {
+    console.error(`Error fetching category with slug ${slug}:`, error);
+    return null;
+  }
+}
+
+export async function getCategories(): Promise<Category[]> {
+  if (!API_URL || API_URL.includes('your-wordpress-site.com')) {
+    return DUMMY_CATEGORIES;
+  }
+
+  const client = new GraphQLClient(API_URL);
+
+  const query = gql`
+        query GetCategories {
+            categories(first: 20, where: { hideEmpty: true }) {
+                nodes {
+                    id
+                    name
+                    slug
+                    count
+                }
+            }
+        }
+    `;
+
+  try {
+    const data: any = await client.request(query);
+    return data.categories.nodes;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return DUMMY_CATEGORIES;
+  }
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  if (!API_URL || API_URL.includes('your-wordpress-site.com')) {
+    return { title: 'TechnoVerse', description: 'Your portal to the future of technology.' };
+  }
+
+  const client = new GraphQLClient(API_URL);
+
+  const query = gql`
+        query GetSiteSettings {
+            generalSettings {
+                title
+                description
+            }
+        }
+    `;
+
+  try {
+    const data: any = await client.request(query);
+    return data.generalSettings;
+  } catch (error) {
+    console.error('Error fetching site settings:', error);
+    return { title: 'TechnoVerse', description: 'Your portal to the future of technology.' };
   }
 }

@@ -1,23 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Header.module.css';
+import { getCategories, getSiteSettings } from '@/lib/get-posts';
+import Nav from './Nav';
 
-const Header = () => {
+const Header = async () => {
+    const categories = await getCategories();
+    const settings = await getSiteSettings();
+
     return (
         <header className={`${styles.header} glass-panel`}>
             <div className={styles.container}>
                 <div className={styles.logo}>
-                    <span className="text-gradient">TECHNO</span>VERSE
+                    <span className="text-gradient" style={{ textTransform: 'uppercase' }}>
+                        {settings.title}
+                    </span>
                 </div>
 
-                <nav className={styles.nav}>
-                    <Link href="/" className={styles.link}>HOME</Link>
-                    <Link href="#" className={styles.link}>NEWS</Link>
-                    <Link href="#" className={styles.link}>REVIEWS</Link>
-                    <Link href="#" className={styles.link}>PODCASTS</Link>
-                    <Link href="#" className={styles.link}>VIDEOS</Link>
-                    <Link href="#" className={styles.link}>ABOUT</Link>
-                </nav>
+                <Nav categories={categories} />
 
                 <div className={styles.actions}>
                     <button className={styles.iconBtn} aria-label="Search">

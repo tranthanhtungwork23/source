@@ -44,9 +44,21 @@
     position: relative;
 }
 
-.link:hover {
+.link:hover,
+.link.active {
     color: var(--color-primary);
     text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+}
+
+.link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary);
 }
 
 .actions {
